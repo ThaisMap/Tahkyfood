@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { useDispatch } from 'react-redux';
 import theme from '../../theme';
+import { useAppDispatch } from '../hooks';
 import { addItem } from '../store/options';
 
 const AddItem = () => {
   const [itemName, setItemName] = useState('');
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handlePressed = () => {
-    console.log(itemName);
     dispatch(addItem(itemName));
   };
 

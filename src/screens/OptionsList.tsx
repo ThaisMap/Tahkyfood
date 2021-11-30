@@ -1,18 +1,14 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import { useSelector } from 'react-redux';
 import AddItem from '../components/AddItem';
 import Container from '../components/Layout/Container';
 import ListItem from '../components/List/ListItem';
 import Separator from '../components/List/Separator';
-import { RootState } from '../store';
-import { Option } from '../types/option';
+import { useAppSelector } from '../hooks';
 
 const OptionsList = () => {
   const renderItem = ({ item }) => <ListItem title={item.title} />;
-  const options = useSelector<RootState>(
-    state => state.options as Array<Option>,
-  );
+  const options = useAppSelector(state => state.optionsReducer.options);
   return (
     <Container alignItems="stretch">
       <AddItem />

@@ -1,12 +1,14 @@
-import { createStore, combineReducers } from 'redux';
 import optionsReducer from './options';
+import { configureStore } from '@reduxjs/toolkit';
 
-const rootReducer = combineReducers({
-  options: optionsReducer,
+const store = configureStore({
+  reducer: {
+    optionsReducer,
+  },
 });
 
-const store = createStore(rootReducer);
+type RootState = ReturnType<typeof store.getState>;
+type AppDispatch = typeof store.dispatch;
 
 export default store;
-
-export type RootState = ReturnType<typeof store.getState>;
+export { RootState, AppDispatch };
