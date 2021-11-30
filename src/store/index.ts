@@ -1,10 +1,12 @@
-import { createStore } from 'redux';
-import options from '../utils/Opcoes';
+import { createStore, combineReducers } from 'redux';
+import optionsReducer from './options';
 
-const INITIAL_STATE = options;
+const rootReducer = combineReducers({
+  options: optionsReducer,
+});
 
-function reducer(state = INITIAL_STATE, action) {
-  return state;
-}
+const store = createStore(rootReducer);
 
-export default createStore(reducer);
+export default store;
+
+export type RootState = ReturnType<typeof store.getState>;
