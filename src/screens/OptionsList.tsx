@@ -7,7 +7,7 @@ import Separator from '../components/List/Separator';
 import { useAppSelector } from '../hooks';
 
 const OptionsList = () => {
-  const renderItem = ({ item }) => <ListItem title={item.title} />;
+  const renderItem = ({ item }) => <ListItem item={item} />;
   const options = useAppSelector(state => state.optionsReducer.options);
   return (
     <Container alignItems="stretch">

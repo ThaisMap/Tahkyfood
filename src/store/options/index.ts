@@ -57,8 +57,12 @@ const optionsSlice = createSlice({
         };
       },
     },
+    removeItem(state, action: PayloadAction<string>) {
+      const id = action.payload;
+      state.options = state.options.filter(item => item.id !== id);
+    },
   },
 });
 
 export default optionsSlice.reducer;
-export const { addItem, pickRandom } = optionsSlice.actions;
+export const { addItem, pickRandom, removeItem } = optionsSlice.actions;
