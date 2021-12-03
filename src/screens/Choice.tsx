@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../hooks';
 import { pickRandom } from '../store/options';
 
 const Choice = () => {
-  const chosen: Option = useAppSelector(state => state.optionsReducer.pick);
+  const chosen: Option = useAppSelector(state => state.persistedReducer.pick);
   const dispatch = useAppDispatch();
   const handlePick = () => {
     dispatch(pickRandom());

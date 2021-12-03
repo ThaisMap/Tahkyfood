@@ -8,7 +8,8 @@ import { useAppSelector } from '../hooks';
 
 const OptionsList = () => {
   const renderItem = ({ item }) => <ListItem item={item} />;
-  const options = useAppSelector(state => state.optionsReducer.options);
+  const options = useAppSelector(state => state.persistedReducer.options);
+
   return (
     <Container alignItems="stretch">
       <AddItem />
