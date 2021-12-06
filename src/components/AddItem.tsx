@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import theme from '../../theme';
-import { useAppDispatch } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { addItem } from '../store/options';
 
 const AddItem = () => {
   const [itemName, setItemName] = useState('');
+  const options = useAppSelector(state => state.persistedReducer.options);
   const dispatch = useAppDispatch();
-
+  const isDisabled =
+    !itemName.length ||
+    options.some(
+      option => option.title.toLowerCase() === itemName.toLowerCase().trim(),
+    );
   const handlePressed = () => {
-    dispatch(addItem(itemName));
+    dispatch(addItem(itemName.trim()));
   };
 
   return (
@@ -21,9 +26,15 @@ const AddItem = () => {
       />
       <Pressable
         onPress={handlePressed}
+        disabled={isDisabled}
         style={({ pressed }) => [
           {
             opacity: pressed ? 0.7 : 1,
+          },
+          {
+            backgroundColor: isDisabled
+              ? theme.colors.rosaMedio
+              : theme.colors.primary,
           },
           styles.button,
         ]}>
@@ -52,7 +63,6 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    backgroundColor: theme.colors.primary,
     padding: 4,
     marginHorizontal: 4,
     borderRadius: 8,
