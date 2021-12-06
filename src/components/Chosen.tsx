@@ -1,15 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
+import { useAppSelector } from '../hooks';
 import Container from './Layout/Container';
+import Loading from './Loading';
 
-interface Props {
-  text: string;
-}
+const Chosen = () => {
+  const { pick, loading } = useAppSelector(state => state.persistedReducer);
 
-const Chosen = ({ text }: Props) => {
   return (
     <Container>
-      <Text style={styles.text}>{text}</Text>
+      {loading ? <Loading /> : <Text style={styles.text}>{pick.title}</Text>}
     </Container>
   );
 };

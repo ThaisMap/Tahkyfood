@@ -4,11 +4,13 @@ import { Option } from '../../types/option';
 interface OptionsState {
   options: Option[];
   pick: Option;
+  loading: boolean;
 }
 
 const initialState: OptionsState = {
   options: [],
   pick: { id: '', title: '' },
+  loading: false,
 };
 
 const optionsSlice = createSlice({
@@ -36,8 +38,20 @@ const optionsSlice = createSlice({
       const id = action.payload;
       state.options = state.options.filter(item => item.id !== id);
     },
+    enableLoading(state) {
+      state.loading = true;
+    },
+    disableLoading(state) {
+      state.loading = false;
+    },
   },
 });
 
 export default optionsSlice.reducer;
-export const { addItem, pickRandom, removeItem } = optionsSlice.actions;
+export const {
+  addItem,
+  pickRandom,
+  removeItem,
+  enableLoading,
+  disableLoading,
+} = optionsSlice.actions;
