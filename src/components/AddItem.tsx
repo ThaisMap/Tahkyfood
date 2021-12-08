@@ -15,6 +15,7 @@ const AddItem = () => {
     );
   const handlePressed = () => {
     dispatch(addItem(itemName.trim()));
+    setItemName('');
   };
 
   return (
@@ -23,10 +24,12 @@ const AddItem = () => {
         value={itemName}
         onChangeText={setItemName}
         style={styles.input}
+        accessibilityLabel="inputItem"
       />
       <Pressable
         onPress={handlePressed}
         disabled={isDisabled}
+        accessibilityLabel="buttonAddItem"
         style={({ pressed }) => [
           {
             opacity: pressed ? 0.7 : 1,

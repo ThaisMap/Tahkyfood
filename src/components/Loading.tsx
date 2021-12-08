@@ -4,7 +4,7 @@ import theme from '../../theme';
 
 const Loading = () => {
   return (
-    <View style={styles.container}>
+    <View accessibilityLabel="loadingIndicator" style={styles.container}>
       <ActivityIndicator size={50} color={theme.colors.primary} />
     </View>
   );

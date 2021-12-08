@@ -9,7 +9,13 @@ const Chosen = () => {
 
   return (
     <Container>
-      {loading ? <Loading /> : <Text style={styles.text}>{pick.title}</Text>}
+      {loading ? (
+        <Loading />
+      ) : (
+        <Text accessibilityLabel={`chosen${pick.title}`} style={styles.text}>
+          {pick.title}
+        </Text>
+      )}
     </Container>
   );
 };

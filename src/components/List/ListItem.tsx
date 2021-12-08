@@ -17,9 +17,12 @@ const ListItem = ({ item }: Props) => {
 
   return (
     <View style={styles.item}>
-      <Text style={styles.title}>{item.title}</Text>
+      <Text accessibilityLabel={`listItem${item.title}`} style={styles.title}>
+        {item.title}
+      </Text>
       <Pressable
         onPress={handlePressed}
+        accessibilityLabel={`iconDelete${item.title}`}
         style={({ pressed }) => [
           {
             opacity: pressed ? 0.7 : 1,

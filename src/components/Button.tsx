@@ -5,11 +5,15 @@ import theme from '../../theme';
 interface Props {
   onPress: () => void;
   text: string;
+  accessibilityLabel: string;
 }
 
-const Button = ({ onPress, text }: Props) => {
+const Button = ({ onPress, text, accessibilityLabel }: Props) => {
   return (
-    <Pressable onPress={onPress} style={styles.button}>
+    <Pressable
+      onPress={onPress}
+      style={styles.button}
+      accessibilityLabel={accessibilityLabel}>
       <Text style={styles.text}>{text}</Text>
     </Pressable>
   );

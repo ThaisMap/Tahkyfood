@@ -15,7 +15,7 @@ import {
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['options'],
+  whitelist: ['options', 'pick'],
 };
 
 const persistedReducer = persistReducer(persistConfig, optionsReducer);

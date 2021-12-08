@@ -18,7 +18,11 @@ const Choice = () => {
   return (
     <Container>
       <Chosen />
-      <Button onPress={handlePick} text="Escolher" />
+      <Button
+        accessibilityLabel="buttonChoose"
+        onPress={handlePick}
+        text="Escolher"
+      />
     </Container>
   );
 };

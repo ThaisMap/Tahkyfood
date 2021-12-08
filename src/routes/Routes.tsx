@@ -44,6 +44,7 @@ function Routes() {
               component={OptionsList}
               options={{
                 tabBarLabel: 'Lista',
+                tabBarAccessibilityLabel: 'tabBarLista',
                 tabBarIcon: ({ color }) => (
                   <FontAwesome5 name="list-alt" size={24} color={color} />
                 ),
@@ -54,6 +55,7 @@ function Routes() {
               component={Choice}
               options={{
                 tabBarLabel: 'Escolha',
+                tabBarAccessibilityLabel: 'tabBarEscolha',
                 tabBarIcon: ({ color }) => (
                   <FontAwesome5 name="random" size={24} color={color} />
                 ),
