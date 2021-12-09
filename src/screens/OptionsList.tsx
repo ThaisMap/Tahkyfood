@@ -1,5 +1,6 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Text } from 'react-native';
+import { appVersion } from '../../utils/appVersion';
 import AddItem from '../components/AddItem';
 import Container from '../components/Layout/Container';
 import ListItem from '../components/List/ListItem';
@@ -19,6 +20,11 @@ const OptionsList = () => {
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />
+      <Text
+        style={{
+          width: '100%',
+          textAlign: 'center',
+        }}>{`Versão ${appVersion}`}</Text>
     </Container>
   );
 };
