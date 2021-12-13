@@ -1,9 +1,11 @@
 name: Appium CI
-on: [push]
+on:
+  pull_request:
+    branches: [stage]
 
 jobs:
   TesteE2E:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     name: Appium Test
     steps:
       - name: Checkout
@@ -15,8 +17,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      # Clean Packages & Install Dependencies 
-      - name: Clean Packages 
+      # Clean Packages & Install Dependencies
+      - name: Clean Packages
         run: |
           rm -rf node_modules
           npm cache clean --force
@@ -36,7 +38,7 @@ jobs:
           nohup $ANDROID_HOME/emulator/emulator -avd test_device -no-snapshot > /dev/null 2>&1 &
           $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
           $ANDROID_HOME/platform-tools/adb devices
-          echo "Emulator started"          
+          echo "Emulator started"
       - name: Build expo and run tests
         run: |
           expo start --android
