@@ -18,8 +18,12 @@ const optionsSlice = createSlice({
   initialState,
   reducers: {
     pickRandom(state) {
-      const randomIndex = Math.floor(Math.random() * state.options.length);
-      state.pick = state.options[randomIndex];
+      if (state.options.length) {
+        const randomIndex = Math.floor(Math.random() * state.options.length);
+        state.pick = state.options[randomIndex];
+      } else {
+        state.pick = { id: '', title: '' };
+      }
     },
     addItem: {
       reducer: (state, action: PayloadAction<Option>) => {

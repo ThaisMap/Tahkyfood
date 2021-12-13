@@ -16,7 +16,7 @@ const ListItem = ({ item }: Props) => {
   };
 
   return (
-    <View style={styles.item}>
+    <View style={styles.item} accessibilityLabel="oneListItem">
       <Text accessibilityLabel={`listItem${item.title}`} style={styles.title}>
         {item.title}
       </Text>
