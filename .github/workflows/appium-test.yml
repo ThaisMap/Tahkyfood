@@ -1,0 +1,39 @@
+name: Appium CI
+on: [push]
+
+jobs:
+  TesteE2E:
+    runs-on: ubuntu-latest
+    name: Appium Test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      # Setup Node
+      - name: Set up Node JS 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+      # Clean Packages & Install Dependencies
+      - name: Clean Packages
+        run: |
+          rm -rf node_modules
+          npm cache clean --force
+          rm -rf package-lock.json
+      - run: yarn install
+      # Run Android Emulator
+      - name: Android Emulator (faruktoptas)
+        # You may pin to the exact commit or the version.
+        # uses: faruktoptas/android-github-actions-emulator@e2ffe55999aba8b1bd16e1711a373c3aeac7327d
+        uses: faruktoptas/android-github-actions-emulator@1.1.0
+      # Installs appium directly
+      - name: Install Appium
+        run: yarn add appium
+      - uses: expo/expo-github-action@v6
+        with:
+          expo-version: 4.x
+          token: ${{ secrets.EXPO_TOKEN }}
+      - name: Build expo and run tests
+        run: |
+          expo start --android
+          sleep 15
+          yarn test
