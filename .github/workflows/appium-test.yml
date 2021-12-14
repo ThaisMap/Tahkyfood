@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
   TesteE2E:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     name: Appium Test
     steps:
       - name: Checkout
