@@ -1,7 +1,5 @@
 name: Appium CI
-on:
-  pull_request:
-    branches: [stage]
+on: [push]
 
 jobs:
   TesteE2E:
@@ -10,11 +8,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install and Run Appium Server
-        uses: moatazeldebsy/appium-server-gitHub-action@V1.0.4
-      # Setup Node JS - 10.17.0
-      - name: Set up Node JS 10.17.0
-        uses: actions/setup-node@v1
+      # Setup Node
+      - name: Set up Node JS 14.x
+        uses: actions/setup-node@v2
         with:
           node-version: 14.x
       # Clean Packages & Install Dependencies
@@ -23,10 +19,6 @@ jobs:
           rm -rf node_modules
           npm cache clean --force
           rm -rf package-lock.json
-      - uses: expo/expo-github-action@v6
-        with:
-          expo-version: 4.x
-          token: ${{ secrets.EXPO_TOKEN }}
       - run: yarn install
       # Run Android Emulator
       - name: Run Android Emulator
@@ -39,8 +31,15 @@ jobs:
           $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
           $ANDROID_HOME/platform-tools/adb devices
           echo "Emulator started"
+      # Installs appium directly
+      - name: Install Appium
+        run: yarn add appium
+      - uses: expo/expo-github-action@v6
+        with:
+          expo-version: 4.x
+          token: ${{ secrets.EXPO_TOKEN }}
       - name: Build expo and run tests
         run: |
           expo start --android
           sleep 15
-          npm run e2e-test
+          yarn test
